@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="300" height="400">
+  <rect width="300" height="400" fill="#f0eae1" rx="8"/>
+  <rect x="15" y="15" width="270" height="370" fill="none" stroke="#d5c7b5" stroke-width="2" stroke-dasharray="6,6" rx="6"/>
+  <g fill="#1e3a5f" opacity="0.6" transform="translate(110, 150)">
+    <path d="M40 0C25 0 10 5 0 15v45c10-8 25-12 40-12s30 4 40 12V15C70 5 55 0 40 0z"/>
+    <path d="M40 50c-15 0-30 4-40 12v5c10-8 25-12 40-12s30 4 40 12v-5c-10-8-25-12-40-12z"/>
+  </g>
+  <text x="150" y="240" font-family="Georgia, serif" font-size="16" fill="#1e3a5f" text-anchor="middle" font-weight="bold">BukuKita</text>
+  <text x="150" y="265" font-family="system-ui, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">Cover Tidak Tersedia</text>
+</svg>

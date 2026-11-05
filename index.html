@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masuk — BukuKita</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Contoh CSS Internal (Kriteria Penilaian UTS Web 1) -->
+  <style>
+    .login-stage {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+
+    .login-center-area {
+      flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .login-panel {
+      width: 100%;
+      max-width: 420px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 38px 32px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+    }
+
+    .login-brand-meta {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body class="login-stage">
+
+  <header class="site-header" role="banner">
+    <div class="container navbar">
+      <a href="index.html" class="brand-link">
+        <img src="assets/logo.png" alt="Logo BukuKita" class="brand-logo" onerror="this.style.display='none'">
+        <span>BukuKita</span>
+        <span class="brand-edition">Toko Buku Online</span>
+      </a>
+
+      <!-- Contoh CSS Inline (Kriteria Penilaian UTS Web 1) -->
+      <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">
+        UTS Pemrograman Web 1
+      </div>
+    </div>
+  </header>
+
+  <main class="login-center-area" role="main">
+    <article class="login-panel">
+
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div class="login-brand-meta">Koleksi Terkurasi 2026</div>
+        <h1 style="font-family: var(--font-serif); font-size: 1.65rem; font-weight: 700; margin-bottom: 6px;">
+          Selamat Datang
+        </h1>
+        <p class="text-sm text-muted">
+          Silakan masuk ke akun Anda untuk mulai memesan buku.
+        </p>
+      </div>
+
+      <form id="formLogin" novalidate>
+        <div class="form-group">
+          <label for="loginEmail" class="form-label">Email Akun <span class="req">*</span></label>
+          <input type="email" id="loginEmail" name="email" class="form-control" placeholder="nama@bukukita.com" required
+            autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label for="loginPassword" class="form-label" style="margin-bottom: 0;">Kata Sandi <span
+                class="req">*</span></label>
+            <button type="button" class="text-xs text-muted" id="btnBukaLupaPw" style="text-decoration: underline;">Lupa
+              sandi?</button>
+          </div>
+          <div class="input-password-wrapper" style="margin-top: 4px;">
+            <input type="password" id="loginPassword" name="password" class="form-control"
+              placeholder="Masukkan password" required autocomplete="current-password">
+            <button type="button" class="btn-toggle-pw" id="btnToggleLoginPw" aria-label="Lihat atau sembunyikan sandi"
+              tabindex="-1">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+          <div id="loginError" class="form-error" aria-live="polite"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 6px;">
+          Masuk ke Toko
+        </button>
+
+        <div
+          style="margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--border); font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center;">
+          <span class="text-muted">Belum punya akun?</span>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnBukaDaftar">
+            Daftar Akun Baru
+          </button>
+        </div>
+      </form>
+
+    </article>
+  </main>
+
+  <div class="modal-overlay" id="modalLupaPassword" role="dialog" aria-modal="true" aria-labelledby="modalLupaPwTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalLupaPwTitle" class="modal-title">Pemulihan Kata Sandi</h2>
+        <button type="button" class="modal-close" data-close-modal aria-label="Tutup">&times;</button>
+      </div>
+      <form id="formLupaPassword">
+        <div class="modal-body">
+          <p class="text-sm text-muted">Masukkan alamat email Anda. Kami akan mengirimkan instruksi pemulihan kata sandi
+            (simulasi).</p>
+          <div class="form-group" style="margin-top: 12px;">
+            <label for="lupaEmail" class="form-label">Email Terdaftar <span class="req">*</span></label>
+            <input type="email" id="lupaEmail" class="form-control" placeholder="nama@email.com" required>
+            <div id="lupaError" class="form-error"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost btn-sm" data-close-modal>Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm">Kirim Instruksi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalDaftar" role="dialog" aria-modal="true" aria-labelledby="modalDaftarTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalDaftarTitle" class="modal-title">Registrasi Akun Baru</h2>
+        <button type="button" class="modal-close" data-close-modal aria-label="Tutup">&times;</button>
+      </div>
+      <form id="formDaftar">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="daftarNama" class="form-label">Nama Lengkap <span class="req">*</span></label>
+            <input type="text" id="daftarNama" class="form-control" placeholder="Contoh: Budi Santoso" required>
+          </div>
+          <div class="form-group">
+            <label for="daftarEmail" class="form-label">Email <span class="req">*</span></label>
+            <input type="email" id="daftarEmail" class="form-control" placeholder="nama@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="daftarPassword" class="form-label">Kata Sandi (Min. 6 Karakter) <span
+                class="req">*</span></label>
+            <input type="password" id="daftarPassword" class="form-control" placeholder="Minimal 6 karakter" required>
+          </div>
+          <div class="form-group">
+            <label for="daftarKonfirmasi" class="form-label">Konfirmasi Kata Sandi <span class="req">*</span></label>
+            <input type="password" id="daftarKonfirmasi" class="form-control" placeholder="Ulangi kata sandi" required>
+          </div>
+          <div id="daftarError" class="form-error"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost btn-sm" data-close-modal>Batal</button>
+          <button type="submit" class="btn btn-accent btn-sm">Daftar Sekarang</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>&copy; 2026 BukuKita — Toko Buku Online</div>
+      <div>Pengembang: <span class="footer-author">Muhammad Alghofiqi</span></div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (cekSesi(false)) { window.location.href = 'dashboard.html'; return; }
+      document.getElementById('formLogin')?.addEventListener('submit', prosesLogin);
+      document.getElementById('btnBukaLupaPw')?.addEventListener('click', () => bukaModal('modalLupaPassword'));
+      document.getElementById('formLupaPassword')?.addEventListener('submit', prosesLupaPassword);
+      document.getElementById('btnBukaDaftar')?.addEventListener('click', () => bukaModal('modalDaftar'));
+      document.getElementById('formDaftar')?.addEventListener('submit', prosesDaftar);
+      const btnPw = document.getElementById('btnToggleLoginPw');
+      const inputPw = document.getElementById('loginPassword');
+      if (btnPw && inputPw) {
+        btnPw.addEventListener('click', () => {
+          inputPw.type = inputPw.type === 'password' ? 'text' : 'password';
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

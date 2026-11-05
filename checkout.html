@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout &amp; Pemesanan — BukuKita</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="site-header" role="banner">
+    <div class="container navbar">
+      <a href="dashboard.html" class="brand-link">
+        <img src="assets/logo.png" alt="Logo BukuKita" class="brand-logo" onerror="this.src='img/placeholder.svg'">
+        <span>BukuKita</span>
+        <span class="brand-edition">Toko Buku Online</span>
+      </a>
+
+      <button type="button" class="nav-hamburger" id="navHamburger" aria-label="Buka navigasi">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <ul class="nav-links" id="navLinks" role="navigation">
+        <li><a href="dashboard.html" class="nav-link">Beranda</a></li>
+        <li><a href="stok.html" class="nav-link">Katalog Buku</a></li>
+        <li><a href="checkout.html" class="nav-link active">Keranjang <span class="nav-badge" id="navCartBadge" style="display:none;">0</span></a></li>
+        <li><a href="tracking.html" class="nav-link">Lacak Pengiriman</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button type="button" class="btn btn-ghost btn-sm" id="btnLogout" title="Keluar">
+          Keluar
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content" role="main">
+    <div class="container">
+
+      <div style="border-bottom: 1px solid var(--border); padding-bottom: 16px; margin-bottom: 22px;">
+        <div class="text-xs text-mono text-muted" style="text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Tahap Akhir Pemesanan</div>
+        <h1 style="font-size: 1.65rem; font-weight: 700;">Checkout &amp; Rincian Pengiriman</h1>
+      </div>
+
+      <div class="checkout-layout">
+
+        <section>
+          <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xs); padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h2 style="font-size: 1.1rem; font-weight: 700;">Daftar Item Keranjang</h2>
+            </div>
+
+            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+              <select id="selectTambahItemCepat" class="form-control" style="font-size: 0.85rem;">
+                <option value="">-- Tambah Buku dari Katalog --</option>
+              </select>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnTambahItemCepat">
+                + Tambah
+              </button>
+            </div>
+
+            <div id="wrapperTabelKeranjang" class="table-responsive">
+              <table class="data-table" id="tabelKeranjang">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 36px;">No</th>
+                    <th scope="col">Buku</th>
+                    <th scope="col" class="th-num">Harga</th>
+                    <th scope="col" style="width: 80px;">Qty</th>
+                    <th scope="col" class="th-num">Subtotal</th>
+                    <th scope="col" style="width: 50px;">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyKeranjang"></tbody>
+              </table>
+            </div>
+
+            <div id="emptyKeranjang" class="empty-state" style="display: none;">
+              <div class="empty-state-title">Keranjang belanja Anda kosong</div>
+              <p class="empty-state-desc">Pilih koleksi buku favorit di halaman Katalog untuk melanjutkan pemesanan.</p>
+              <a href="stok.html" class="btn btn-primary btn-sm">Buka Katalog Buku</a>
+            </div>
+
+          </div>
+        </section>
+
+        <section>
+          <form id="formCheckout" novalidate>
+
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xs); padding: 18px; margin-bottom: 18px;">
+              <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                Ringkasan Biaya
+              </h2>
+              <div style="display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 6px;">
+                <span class="text-muted">Subtotal Buku</span>
+                <strong id="checkoutSubtotal" class="text-mono">Rp 0</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 10px;">
+                <span class="text-muted">Ongkos Kirim</span>
+                <strong id="checkoutOngkir" class="text-mono">Rp 0</strong>
+              </div>
+              <div style="border-top: 1px dashed var(--border); padding-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; font-size: 0.95rem;">Total Tagihan</span>
+                <span style="font-weight: 700; font-size: 1.2rem; color: var(--accent); font-family: var(--font-mono);" id="checkoutTotalAkhir">Rp 0</span>
+              </div>
+            </div>
+
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xs); padding: 18px;">
+              <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                Tujuan &amp; Pembayaran
+              </h2>
+
+              <div class="form-group">
+                <label for="checkoutNama" class="form-label">Nama Pemesan <span class="req">*</span></label>
+                <input type="text" id="checkoutNama" class="form-control" required placeholder="Nama lengkap penerima">
+              </div>
+
+              <div class="form-group">
+                <label for="checkoutEmail" class="form-label">Email Pemesan <span class="req">*</span></label>
+                <input type="email" id="checkoutEmail" class="form-control" required placeholder="nama@email.com">
+              </div>
+
+              <div class="form-group">
+                <label for="checkoutHp" class="form-label">Nomor WhatsApp / HP <span class="req">*</span></label>
+                <input type="tel" id="checkoutHp" class="form-control" required placeholder="08xxxxxxxxxx">
+              </div>
+
+              <div class="form-group">
+                <label for="checkoutAlamat" class="form-label">Alamat Pengiriman <span class="req">*</span></label>
+                <textarea id="checkoutAlamat" class="form-control" rows="3" required placeholder="Nama jalan, nomor rumah, RT/RW, kecamatan, kota/kabupaten, kode pos"></textarea>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="form-group">
+                  <label for="checkoutEkspedisi" class="form-label">Kurir Ekspedisi <span class="req">*</span></label>
+                  <select id="checkoutEkspedisi" class="form-control" required>
+                    <option value="JNE">JNE</option>
+                    <option value="J&amp;T Express">J&amp;T Express</option>
+                    <option value="SiCepat">SiCepat</option>
+                    <option value="AnterAja">AnterAja</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="checkoutJenisPaket" class="form-label">Layanan <span class="req">*</span></label>
+                  <select id="checkoutJenisPaket" class="form-control" required>
+                    <option value="Reguler">Reguler (Rp 12.000)</option>
+                    <option value="Express">Express (Rp 25.000)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="checkoutMetode" class="form-label">Metode Pembayaran <span class="req">*</span></label>
+                <select id="checkoutMetode" class="form-control" required>
+                  <option value="Transfer Bank">Transfer Bank (BCA / Mandiri / BNI)</option>
+                  <option value="E-Wallet">E-Wallet (GoPay / OVO / Dana)</option>
+                  <option value="COD">Cash on Delivery (Bayar di Tempat)</option>
+                </select>
+              </div>
+
+              <div id="checkoutError" class="form-error" style="margin-bottom: 12px;"></div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnSubmitPesanan">
+                Buat Pesanan &amp; Dapatkan No. DO
+              </button>
+            </div>
+
+          </form>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="modalKonfirmasiPesanan" role="dialog" aria-modal="true" aria-labelledby="modalKonfirmasiTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalKonfirmasiTitle" class="modal-title">Konfirmasi Final Pesanan</h2>
+        <button type="button" class="modal-close" data-close-modal aria-label="Tutup">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-sm text-muted" style="margin-bottom: 10px;">
+          Mohon periksa ringkasan data sebelum nomor Delivery Order diterbitkan:
+        </p>
+        <div id="konfirmasiRingkasanPesanan"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-ghost btn-sm" data-close-modal>Koreksi Data</button>
+        <button type="button" class="btn btn-accent btn-sm" id="btnSelesaikanPesananFinal">Terbitkan Pesanan</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>&copy; 2026 BukuKita — Toko Buku Online</div>
+      <div>Pengembang: <span class="footer-author">Muhammad Alghofiqi</span></div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const user = cekSesi(true);
+      if (!user) return;
+      const inputNama = document.getElementById('checkoutNama');
+      const inputEmail = document.getElementById('checkoutEmail');
+      if (inputNama && !inputNama.value) inputNama.value = user.nama || '';
+      if (inputEmail && !inputEmail.value) inputEmail.value = user.email || '';
+
+      renderTabelCheckout();
+      muatDropdownTambahBukuCheckout();
+      document.getElementById('checkoutJenisPaket')?.addEventListener('change', hitungTotal);
+
+      const btnTambah = document.getElementById('btnTambahItemCepat');
+      const selectCepat = document.getElementById('selectTambahItemCepat');
+      if (btnTambah && selectCepat) {
+        btnTambah.addEventListener('click', () => {
+          if (!selectCepat.value) { tampilkanToast('Pilih buku dari dropdown terlebih dahulu', 'error'); return; }
+          tambahKeKeranjang(selectCepat.value, 1);
+          renderTabelCheckout();
+        });
+      }
+
+      document.getElementById('formCheckout')?.addEventListener('submit', konfirmasiCheckout);
+      document.getElementById('btnSelesaikanPesananFinal')?.addEventListener('click', selesaikanPesanan);
+      document.getElementById('btnLogout')?.addEventListener('click', prosesLogout);
+    });
+  </script>
+</body>
+</html>
