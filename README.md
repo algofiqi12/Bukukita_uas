@@ -158,18 +158,4 @@ Setiap alur dan proses penting telah didokumentasikan dalam format gambar resolu
 - **Pengurangan Stok Otomatis:** Saat pesanan diselesaikan di checkout, stok buku berkurang secara riil di katalog.
 
 ---
-
-## 7. Outline Skrip Video Presentasi UTS (Maksimal 15 Menit)
-
-| Menit | Segmen | Topik Pembahasan & Layar |
-|---|---|---|
-| **00:00 – 01:00** | **1. Pembukaan & Pengantar** | - Sapaan pembuka, perkenalan diri: **Muhammad Alghofiqi**.<br>- Mata kuliah: Pemrograman Web 1 (Tugas UTS).<br>- Menjelaskan produk "BukuKita" dan tujuan penyelesaian 3 indikator UTS. |
-| **01:00 – 03:00** | **2. Alur Berpikir & Struktur Folder** | - Menampilkan struktur folder bersih di code editor.<br>- Menjelaskan 5 halaman HTML wajib, pemisahan CSS dan JS.<br>- Menunjukkan website berjalan murni secara lokal tanpa server. |
-| **03:00 – 05:00** | **3. HTML Semantik & Validitas** | - Menunjukkan elemen semantik (`header`, `nav`, `main`, `section`, `table`, `footer`).<br>- Menunjukkan hubungan label dengan input dan atribut aksesibilitas modal.<br>- Menunjukkan identitas mahasiswa di footer seluruh halaman. |
-| **05:00 – 07:00** | **4. Desain CSS & Responsivitas** | - Membedah `css/style.css` (CSS Eksternal) dengan palet warna kertas lembut yang nyaman di mata.<br>- Menunjukkan contoh **CSS Internal** (`<style>`) di `index.html`.<br>- Menunjukkan contoh **CSS Inline** (`style="..."`).<br>- Menunjukkan tampilan responsif di mobile (menu hamburger & layout collapse). |
-| **07:00 – 11:00** | **5. JavaScript DOM & State Management** | - Menjelaskan validasi login dan pesan alert salah.<br>- Menjelaskan proteksi rute (`cekSesi()`) via `sessionStorage`.<br>- Menjelaskan rendering DOM dinamis katalog dan rak buku beranda.<br>- Menjelaskan keranjang belanja, pengurangan stok, dan penyimpanan `localStorage`. |
-| **11:00 – 14:00** | **6. Demonstrasi Alur Aplikasi Lengkap** | - **Login:** Uji login salah &rarr; login sukses sebagai `fal@bukukita.com`.<br>- **Beranda:** Menunjukkan sapaan jam, rak buku rekomendasi, dan pesan langsung dari beranda.<br>- **Katalog:** Cari judul buku, filter kategori, tambah stok baru, dan pesan ke keranjang.<br>- **Checkout:** Ubah kuantitas buku, lengkapi data pemesan & kurir, konfirmasi &rarr; dapatkan No. DO.<br>- **Tracking:** Lacak nomor DO baru, perhatikan visualisasi status dan progress bar bertahap. |
-| **14:00 – 15:00** | **7. Penutup** | - Kesimpulan pemenuhan seluruh kebutuhan tugas UTS.<br>- Ucapan terima kasih dan salam penutup. |
-
----
 *BukuKita &copy; 2026 — Dibuat oleh Muhammad Alghofiqi untuk UTS Pemrograman Web 1.*
